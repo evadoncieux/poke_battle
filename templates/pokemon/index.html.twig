@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokemonController!{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <h1>Hello </h1>
+
+        {{ dump(pokemonData.results) }}
+
+        {% for pokemon in pokemonData.results %}
+        <h2>{{ pokemon.name }}</h2>
+       <a href="{{ pokemon.url }}">Show</a>
+        {% endfor %}
+    </div>
+{% endblock %}
