@@ -4,43 +4,42 @@ namespace App\Service;
 
 use App\Entity\Pokemon;
 use GuzzleHttp\Client;
-use \Psr\Http\Message\ResponseInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PokemonDataService
 {
     public function __construct()
     {
-        //
     }
 
-    public function getAllPokemon()
+    public function getAllPokemon(): array
     {
         $client = new Client();
-        $limit = 36;
-        $offset = 0;
+
+        $count = 0;
+        $limit = 18;
+        $offset = rand(0, 999);
+        $allPokemon = [];
+
         $response = $client->request('GET', "https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=$offset");
         $decodedResponse = json_decode($response->getBody()->getContents(), true);
 
-        $index = 0;
         foreach ($decodedResponse['results'] as $pokemonData) {
-            echo $index++;
+            if ($count >= $limit) {
+                break;
+            }
             $pokemon = new Pokemon();
             $pokemon->setName($pokemonData['name'])
                 ->setUrl($pokemonData['url']);
+
+            $pokemonDetailsResponse = $client->request('GET', $pokemonData['url']);
+            $pokemonDetailsData = json_decode($pokemonDetailsResponse->getBody()->getContents(), true);
+
+            $pokemon->setImage($pokemonDetailsData['sprites']['front_default']);
+
             $allPokemon[] = $pokemon;
+            $count++;
         }
 
         return $allPokemon;
     }
-
-//    public function getPokemonByInfo($id)
-//    {
-//        $client = new Client();
-//        $response = $client->request('GET', "https://pokeapi.co/api/v2/pokemon/$id");
-//        $decodedResponse = json_decode($response->getBody());
-//        dd($decodedResponse);
-//
-//        return $decodedResponse;
-//    }
 }
