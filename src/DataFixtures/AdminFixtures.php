@@ -25,11 +25,8 @@ class AdminFixtures extends Fixture implements OrderedFixtureInterface
         ->setUsername('admin')
         ->setEmail('admin@poke-battle.com')
         ->setPassword($this->hasher->hashPassword($admin, "admin"))
-        ->setRoles(["ROLE_ADMIN"])
-        ->setCreatedAt($date)
-        ->setUpdateAt($date);
+        ->setRoles(["ROLE_ADMIN"]);
         $manager->persist($admin);
-
         $manager->flush();
     }
 
