@@ -2,8 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\Pokemon;
 use GuzzleHttp\Client;
 use \Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PokemonDataService
 {
@@ -12,20 +14,33 @@ class PokemonDataService
         //
     }
 
-    public function getPokemon()
+    public function getAllPokemon()
     {
         $client = new Client();
-        $response = $client->request('GET', 'https://pokeapi.co/api/v2/pokemon?limit=36&offset=0');
+        $limit = 36;
+        $offset = 0;
+        $response = $client->request('GET', "https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=$offset");
+        $decodedResponse = json_decode($response->getBody()->getContents(), true);
 
+        $index = 0;
+        foreach ($decodedResponse['results'] as $pokemonData) {
+            echo $index++;
+            $pokemon = new Pokemon();
+            $pokemon->setName($pokemonData['name'])
+                ->setUrl($pokemonData['url']);
+            $allPokemon[] = $pokemon;
+        }
 
-//        // Send an asynchronous request.
-//        $request = new \GuzzleHttp\Psr7\Request('GET', 'http://httpbin.org');
-//        $promise = $client->sendAsync($request)->then(function ($response) {
-//            echo 'I completed! ' . $response->getBody();
-//        });
-//
-//        $promise->wait();
-
-        return json_decode($response->getBody());
+        return $allPokemon;
     }
+
+//    public function getPokemonByInfo($id)
+//    {
+//        $client = new Client();
+//        $response = $client->request('GET', "https://pokeapi.co/api/v2/pokemon/$id");
+//        $decodedResponse = json_decode($response->getBody());
+//        dd($decodedResponse);
+//
+//        return $decodedResponse;
+//    }
 }

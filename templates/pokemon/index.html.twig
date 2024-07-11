@@ -4,14 +4,17 @@
 
 {% block body %}
 
-    <div class="example-wrapper">
+    <div>
         <h1>Hello </h1>
 
-        {{ dump(pokemonData.results) }}
+        {{ dump(allPokemon) }}
 
-        {% for pokemon in pokemonData.results %}
-        <h2>{{ pokemon.name }}</h2>
-       <a href="{{ pokemon.url }}">Show</a>
+        <a href="{{ path('app_pokemon_index') }}">Get Pokemon</a>
+
+        {% for pokemon in allPokemon %}
+            <h2>{{ pokemon.name }}</h2>
+{#            <a href="{{ path('app_pokemon_info', {'id' : 1}) }}">Show</a>#}
+            {# <a href="https://pokeapi.co/api/v2/pokemon/{{ pokemon.id }}">Show</a> #}
         {% endfor %}
     </div>
 {% endblock %}
