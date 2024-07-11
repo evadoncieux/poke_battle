@@ -1,0 +1,50 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>70</x><y>50</y><w>150</w><h>140</h></coordinates><panel_attributes>_User_
+--
+id: Long="36548"
+username:string
+email:string
+password:string
+createdAt:dateTime
+updatedAt:dateTime
+role:array
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>270</y><w>210</w><h>210</h></coordinates><panel_attributes>_Game_
+--
+id: Long="36548"
+player:int (FK)
+numberOfCards:int
+pokemons:array
+difficulty:int
+points:int
+startedAt:datetime
+finishedAt:datetime
+NumberOfAttempts:int
+status: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>180</y><w>80</w><h>130</h></coordinates><panel_attributes>lt=&lt;-
+extends</panel_attributes><additional_attributes>20;110;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>290</y><w>210</w><h>170</h></coordinates><panel_attributes>_Player_
+--
+id: Long="36548"
+victoriesNumber:int
+score:int
+rank:int
+
+-
+getGames()
+getScore()
+getRank()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>300</y><w>230</w><h>50</h></coordinates><panel_attributes>=-
+m1=1..1
+m2=0..n
+ &gt;</panel_attributes><additional_attributes>10;20;210;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>0</y><w>210</w><h>70</h></coordinates><panel_attributes>_Admin_
+--
+id: Long="36548"
+pseudo:string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>30</y><w>160</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+extends</panel_attributes><additional_attributes>140;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>610</x><y>110</y><w>210</w><h>110</h></coordinates><panel_attributes>_pokemon_
+--
+id: Long="36548"
+name:string
+image:string
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>210</y><w>80</w><h>150</h></coordinates><panel_attributes>=-
+m1=n..n
+m2=n..n
+ &gt;</panel_attributes><additional_attributes>10;130;50;10</additional_attributes></element></diagram>
