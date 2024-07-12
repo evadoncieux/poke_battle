@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/default/index.html.twig' %}
 
 {% block title %}Hello GameController!{% endblock %}
 
@@ -6,21 +6,36 @@
     <h1>A toi de jouer</h1>
 
     {% if game is defined %}
-        <p>{{ game.numberOfCards }} cards</p>
-
-        <div class="card-grid">
-            {% for pokemon in chosenPokemon %}
-                <div class="card">
-                    <h2>{{ pokemon.name }}</h2>
-                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
-                </div>
-            {% endfor %}
-            {% for pokemon in pokemonDuplicates %}
-                <div class="card">
-                    <h2>{{ pokemon.name }}</h2>
-                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
-                </div>
-            {% endfor %}
+        <p>Niveau {{ game.difficulty }} => {{ game.numberOfCards }} cartes</p>
+        <div class="game">
+            <div class="card-grid">
+                {% for pokemon in chosenPokemon %}
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-back">
+                                <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
+                            </div>
+                            <div class="flip-card-front">
+                                <h2>{{ pokemon.name }}</h2>
+                                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for pokemon in pokemonDuplicates %}
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-back">
+                                <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
+                            </div>
+                            <div class="flip-card-front">
+                                <h2>{{ pokemon.name }}</h2>
+                                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 {% endblock %}

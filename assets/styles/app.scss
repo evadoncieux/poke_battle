@@ -44,6 +44,7 @@ h1 {
 }
 
 .card-grid {
+  text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
@@ -68,7 +69,8 @@ h1 {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
+//.flip-card:hover
+.flip-card-inner.reveal {
   transform: rotateY(180deg);
 }
 
@@ -85,15 +87,14 @@ h1 {
   animation: moveGradient 4s ease infinite;
 }
 
-
-.flip-card-front { // côté carte pokémon
+//.flip-card-back { // côté carte pokémon
+.flip-card-front { // côté infos pokémon
   padding: 0;
   margin: 0;
-
 }
 
-
-.flip-card-back { // côté infos pokémon
+//.flip-card-front { // côté infos pokémon
+.flip-card-back { // côté carte pokémon
   transform: rotateY(180deg);
   background-color: #bbb;
   border-radius: 15px;
@@ -104,4 +105,10 @@ h1 {
     padding: 0;
     margin: 0;
   }
+}
+
+.game {
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
