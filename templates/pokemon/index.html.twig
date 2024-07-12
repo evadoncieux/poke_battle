@@ -5,17 +5,33 @@
 {% block body %}
 
     <div>
-        <h1>Hello </h1>
+        <h1>Can you remember all the cards ?</h1>
 
-        <a href="{{ path('app_pokemon_reset') }}">Get a new Pokedex</a>
+        <a href="{{ path('app_pokemon_reset') }}">Get a new Pokédex</a>
 
-        <ol>
+        <h2>Choose your difficulty level</h2>
+        <div class="level-nav">
+            <p class="level-btn">Easy (4 cards)</p>
+            <p class="level-btn">Medium (16 cards)</p>
+            <p class="level-btn">Hard (36 cards)</p>
+        </div>
+
+
+        <div class="card-grid">
             {% for pokemon in allPokemon %}
-                <li>
-                    <h2>{{ pokemon.name }}</h2>
-                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
-                </li>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
+                        </div>
+                        <div class="flip-card-back">
+                            <h2>{{ pokemon.name }}</h2>
+                            <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                        </div>
+
+                    </div>
+                </div>
             {% endfor %}
-        </ol>
+        </div>
     </div>
 {% endblock %}
