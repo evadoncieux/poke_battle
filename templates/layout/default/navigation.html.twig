@@ -4,6 +4,7 @@
     {% if app.user %}
     <span>{{ app.user.email }}</span>
         <a href="{{ path('app_logout') }}">{% trans from 'menu' %}Déconnexion{% endtrans %}</a>
+        <a href="{{ path('app_game_choose', {id:app.user.id}) }}">{% trans from 'menu' %}lancer une partie{% endtrans %}</a>
     {% else %}
         <a href="{{ path('app_login') }}">{% trans from 'menu' %}Connexion{% endtrans %}</a>
     {% endif %}

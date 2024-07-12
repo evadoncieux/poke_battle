@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GameController!{% endblock %}
+
+{% block body %}
+    <h1>A toi de jouer</h1>
+    
+    {% if game is defined %}
+        {{ game.numberOfCards}}
+    {% endif %}
+{% endblock %}
