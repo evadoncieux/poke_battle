@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello player!{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Hello </h1>
+
+        <a href="{{ path('app_pokemon_reset') }}">Get a new Pokedex</a>
+
+        <ol>
+            {% for pokemon in allPokemon %}
+                <li>
+                    <h2>{{ pokemon.name }}</h2>
+                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
