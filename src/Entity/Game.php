@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
@@ -30,15 +31,17 @@ class Game
     private ?int $numberOfCards = null;
 
     #[ORM\Column]
-    private ?int $dificulty = null;
+    private ?int $difficulty = null;
 
     #[ORM\Column]
     private ?int $points = null;
 
     #[ORM\Column]
+    #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $startedAt = null;
 
     #[ORM\Column]
+    #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $finishedAt = null;
 
     #[ORM\Column]
@@ -105,14 +108,14 @@ class Game
         return $this;
     }
 
-    public function getDificulty(): ?int
+    public function getDifficulty(): ?int
     {
-        return $this->dificulty;
+        return $this->difficulty;
     }
 
-    public function setDificulty(int $dificulty): static
+    public function setDifficulty(int $difficulty): static
     {
-        $this->dificulty = $dificulty;
+        $this->difficulty = $difficulty;
 
         return $this;
     }
