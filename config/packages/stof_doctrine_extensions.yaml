@@ -3,6 +3,6 @@
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
-        default:
+        default: 
             timestampable: true
             sluggable: true
