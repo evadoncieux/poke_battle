@@ -10,27 +10,27 @@
         <div class="game">
             <div class="card-grid">
                 {% for pokemon in chosenPokemon %}
-                    <div class="flip-card">
+                    <div class="flip-card" onclick="flipCard(this)">
                         <div class="flip-card-inner">
-                            <div class="flip-card-back">
-                                <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
-                            </div>
                             <div class="flip-card-front">
                                 <h2>{{ pokemon.name }}</h2>
                                 <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                            </div>
+                            <div class="flip-card-back">
+                                <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
                             </div>
                         </div>
                     </div>
                 {% endfor %}
                 {% for pokemon in pokemonDuplicates %}
-                    <div class="flip-card">
+                    <div class="flip-card" onclick="flipCard(this)">
                         <div class="flip-card-inner">
-                            <div class="flip-card-back">
-                                <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
-                            </div>
                             <div class="flip-card-front">
                                 <h2>{{ pokemon.name }}</h2>
                                 <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                            </div>
+                            <div class="flip-card-back">
+                                <img src="{{ asset('img/pokemon-card-back.png') }}" alt="Back of the Pokémon card">
                             </div>
                         </div>
                     </div>
@@ -38,4 +38,10 @@
             </div>
         </div>
     {% endif %}
+
+    <script>
+        function flipCard(card) {
+            card.classList.toggle("flipped");
+        }
+    </script>
 {% endblock %}

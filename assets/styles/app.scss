@@ -10,7 +10,6 @@
   100% {
     background-position: 0 50%;
   }
-
 }
 
 body {
@@ -44,13 +43,11 @@ h1 {
 }
 
 .card-grid {
-  text-align: center;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .flip-card {
-  //padding: 1rem;
   margin: 1rem;
   height: 367px;
   width: 264px;
@@ -66,12 +63,12 @@ h1 {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  transform: rotateY(180deg); /* Start with back side visible */
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-//.flip-card:hover
-.flip-card-inner.reveal {
-  transform: rotateY(180deg);
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(0deg); /* Flip to front side */
 }
 
 /* Position the front and back side */
@@ -87,28 +84,13 @@ h1 {
   animation: moveGradient 4s ease infinite;
 }
 
-//.flip-card-back { // côté carte pokémon
-.flip-card-front { // côté infos pokémon
+.flip-card-front {
   padding: 0;
   margin: 0;
 }
 
-//.flip-card-front { // côté infos pokémon
-.flip-card-back { // côté carte pokémon
-  transform: rotateY(180deg);
-  background-color: #bbb;
-  border-radius: 15px;
+.flip-card-back {
+  transform: rotateY(180deg); /* Front side should be initially hidden */
   padding: 0;
   margin: 0;
-
-  & > img {
-    padding: 0;
-    margin: 0;
-  }
-}
-
-.game {
-  margin: auto;
-  display: flex;
-  justify-content: center;
 }
