@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/default/index.html.twig' %}
 
 {% block title %}Hello player!{% endblock %}
 
@@ -9,13 +9,13 @@
 
         <a href="{{ path('app_pokemon_reset') }}">Get a new Pokedex</a>
 
-        <ol>
+        <div class="card-grid">
             {% for pokemon in allPokemon %}
-                <li>
+                <div class="card">
                     <h2>{{ pokemon.name }}</h2>
                     <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
-                </li>
+                </div>
             {% endfor %}
-        </ol>
+        </div>
     </div>
 {% endblock %}

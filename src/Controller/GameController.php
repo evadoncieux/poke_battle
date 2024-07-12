@@ -17,11 +17,11 @@ class GameController extends AbstractController
 {
 
     #[Route('/game/level', name: 'app_game_choose')]
-    public function index(PokemonRepository $pokemonRepository, 
-            Request $request, 
-            EntityManagerInterface $entityManager, 
-            
-            ): Response
+    public function index(PokemonRepository      $pokemonRepository,
+                          Request                $request,
+                          EntityManagerInterface $entityManager,
+
+    ): Response
     {
         $game = new Game();
         $form = $this->createForm(GameType::class, $game);
@@ -32,12 +32,14 @@ class GameController extends AbstractController
             if ($form->get('difficulty')->getData() == 1) {
                 $game->setNumberOfCards(4);
                 $numberOfPokemons = 2;
-            }elseif($form->get('difficulty')->getData() == 2){ 
+            } elseif ($form->get('difficulty')->getData() == 2) {
                 $game->setNumberOfCards(16);
-            }elseif($form->get('difficulty')->getData() == 3){ 
+                $numberOfPokemons = 8;
+            } elseif ($form->get('difficulty')->getData() == 3) {
                 $game->setNumberOfCards(36);
+                $numberOfPokemons = 18;
             }
-            for ($i=0; $i < $numberOfPokemons; $i++) { 
+            for ($i = 0; $i < $numberOfPokemons; $i++) {
                 $pokemon = $pokemonRepository->findOneBy(['id' => rand(1, 18)]);
                 $game->addPokemon($pokemon);
                 $entityManager->persist($game);
@@ -48,20 +50,26 @@ class GameController extends AbstractController
             $game->setStatus('en cours');
             $entityManager->persist($game);
             $entityManager->flush();
-            
-            
+
             return $this->redirectToRoute('app_game_play', ['id' => $game->getId()]);
         }
         return $this->render('game/index.html.twig', [
             'form' => $form,
         ]);
     }
+
     #[Route('/game/play/{id}', name: 'app_game_play')]
     public function startGame(Game $game)
     {
-        // dd($game);
+         $chosenPokemon = $game->getPokemon()->toArray();
+         $pokemonDuplicates = $game->getPokemon()->toArray();
+         shuffle($pokemonDuplicates);
+//         dd($chosenPokemon);
+
         return $this->render('game/play.html.twig', [
-            'game' => $game
+            'game' => $game,
+            'chosenPokemon' => $chosenPokemon,
+            'pokemonDuplicates' => $pokemonDuplicates,
         ]);
     }
 }

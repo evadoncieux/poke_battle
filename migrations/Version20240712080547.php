@@ -21,7 +21,6 @@ final class Version20240712080547 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE game RENAME COLUMN dificulty TO difficulty');
-        $this->addSql('ALTER TABLE pokemon DROP url');
         $this->addSql('ALTER TABLE pokemon ALTER image SET NOT NULL');
     }
 
@@ -29,7 +28,6 @@ final class Version20240712080547 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE pokemon ADD url VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE pokemon ALTER image DROP NOT NULL');
         $this->addSql('ALTER TABLE game RENAME COLUMN difficulty TO dificulty');
     }

@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PokemonController extends AbstractController
 {
-
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly PokemonDataService     $pokemonDataService,

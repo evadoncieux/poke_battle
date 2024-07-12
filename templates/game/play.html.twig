@@ -4,8 +4,23 @@
 
 {% block body %}
     <h1>A toi de jouer</h1>
-    
+
     {% if game is defined %}
-        {{ game.numberOfCards}}
+        <p>{{ game.numberOfCards }} cards</p>
+
+        <div class="card-grid">
+            {% for pokemon in chosenPokemon %}
+                <div class="card">
+                    <h2>{{ pokemon.name }}</h2>
+                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                </div>
+            {% endfor %}
+            {% for pokemon in pokemonDuplicates %}
+                <div class="card">
+                    <h2>{{ pokemon.name }}</h2>
+                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} image">
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}
