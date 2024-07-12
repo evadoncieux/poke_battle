@@ -30,17 +30,20 @@ class PokemonController extends AbstractController
     #[Route('/pokemon', name: 'app_pokemon_index', methods: ['GET'])]
     public function getAllPokemon(): Response
     {
-        $allPokemonData = $this->pokemonDataService->getAllPokemon();
+        $allPokemonCount = $this->entityManager->getRepository(Pokemon::class)->count([]);
 
-        foreach ($allPokemonData as $pokemonData) {
-            $registeredPokemon = $this->entityManager->getRepository(Pokemon::class)->findOneBy(['name' => $pokemonData->getName()]);
+        if ($allPokemonCount < 18) {
+            $allPokemonData = $this->pokemonDataService->getAllPokemon();
 
-            if (!$registeredPokemon) {
-                $this->entityManager->persist($pokemonData);
+            foreach ($allPokemonData as $pokemonData) {
+                $registeredPokemon = $this->entityManager->getRepository(Pokemon::class)->findOneBy(['name' => $pokemonData->getName()]);
+
+                if (!$registeredPokemon) {
+                    $this->entityManager->persist($pokemonData);
+                }
             }
+            $this->entityManager->flush();
         }
-        $this->entityManager->flush();
-
         $allPokemon = $this->entityManager->getRepository(Pokemon::class)->findAll();
 
         return $this->render('pokemon/index.html.twig', [
